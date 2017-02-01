@@ -1,13 +1,24 @@
-# Paypal Basics
+For Ngrok see this url or run the ngrok in same url
 
-This project illustrates how to manage payments in a Rails 4 application using Paypal service.
+Follow the url
+https://launchschool.com/blog/basic-paypal-checkout-processing-in-rails
+............................................................
 
-This is divided in three branches: 'master', 'cards' and 'recurring'. Each branch corresponds with one 'Tealeaf academy' article:
 
-* ["Process Payments With Paypal in Rails"](http://www.gotealeaf.com/blog/basic-paypal-checkout-processing-in-rails): Using Paypal express accepting payments through Paypal accounts. Corresponds with [master] branch.
-* ["Paypal payments with credit cards"](http://www.gotealeaf.com/blog/paypal-payments-with-credit-cards): Creating our form to accept Credit card Payments without redirecting to another page or gateway. Corresponds with [cards] branch.
-* ["Recurring Payments With Paypal"](http://www.gotealeaf.com/blog/paypal-recurring-payments): Here both payment methods in the first articles are adapted to process recurring payments. Corresponds with [recurring] branch.
+Expose your service to be accessed by Paypal
 
-Enjoy!
+If we think a while we can realize that notification_url and return_url can not be accessed from Paypal because they are not exposed in the public internet, they are in our localhost.
 
-Tealeaf Team
+We will use the Ngrok Service for tunnelling our local application to a Ngrok subdomain. So we will be able to allow Paypal to send a HTTP POST to our localhost and test our payment process locally.
+
+First install Ngrok downloading it for your system. Or just run your package manager if you are on Linux:
+
+1
+
+	
+
+sudo apt-get install ngrok-client
+
+Now you can publish your application just running the command: ngrok 3000, since the rails port is 3000.
+
+It will respond with a URL, http://3c99b47d.ngrok.com in my case. This is the app_host you should configure in your ‘config/secrets.yml’ file. Replace app_host: http://our_ngrok_url by app_host: http://3c99b47d.ngrok.com.
